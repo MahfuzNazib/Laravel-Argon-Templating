@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +37,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    // Writing Code For Custom Login
+    public function login_show(){
+        if(auth('super_admin')->check() || auth('web')->check()){
+            return view('backend.dashboard');
+        }else{
+            return view('auth.login');
+        }
     }
 }
