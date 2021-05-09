@@ -27,12 +27,14 @@
         </style>
     </head>
     <body class="{{ $class ?? '' }}">
-        @auth()
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{-- @auth() --}}
+        @if(auth('super_admin')->check() || auth('web')->check())
+            <form id="logout-form" action="{{ route('do.logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
             @include('backend.layouts.navbars.sidebar')
-        @endauth
+        @endif
+        {{-- @endauth --}}
         
         <div class="main-content">
             @include('backend.layouts.navbars.navbar')

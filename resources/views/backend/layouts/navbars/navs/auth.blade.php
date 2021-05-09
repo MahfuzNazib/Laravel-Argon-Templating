@@ -23,7 +23,11 @@
                             <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-4-800x800.jpg">
                         </span>
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
+                            @if(auth('super_admin')->check())
+                                <span class="mb-0 text-sm  font-weight-bold">{{ auth('super_admin')->user()->name }}</span>
+                            @elseif(auth('web')->check())
+                                <span class="mb-0 text-sm  font-weight-bold">{{ auth('web')->user()->name }}</span>
+                            @endif
                         </div>
                     </div>
                 </a>
@@ -48,7 +52,7 @@
                         <span>{{ __('Support') }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
+                    <a href="{{ route('do.logout') }}" class="dropdown-item" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         <i class="ni ni-user-run"></i>
                         <span>{{ __('Logout') }}</span>

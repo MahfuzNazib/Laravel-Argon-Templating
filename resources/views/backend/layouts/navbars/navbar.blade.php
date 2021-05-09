@@ -1,7 +1,5 @@
-@auth()
+@if (auth('super_admin')->check() || auth('web')->check())
     @include('backend.layouts.navbars.navs.auth')
-@endauth
-    
-@guest()
+@else
     @include('backend.layouts.navbars.navs.guest')
-@endguest
+@endif
