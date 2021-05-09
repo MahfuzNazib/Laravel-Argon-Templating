@@ -32,21 +32,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('register') }}">
+                    <a class="nav-link nav-link-icon" href="#">
                         <i class="ni ni-circle-08"></i>
                         <span class="nav-link-inner--text">{{ __('Register') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('login') }}">
+                    <a class="nav-link nav-link-icon" href="{{ route('do.login') }}">
                         <i class="ni ni-key-25"></i>
                         <span class="nav-link-inner--text">{{ __('Login') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="{{ route('backend.modules.profile.edit') }}">
+                    <a class="nav-link nav-link-icon" onclick="document.getElementById('logout-form').submit()">
                         <i class="ni ni-single-02"></i>
-                        <span class="nav-link-inner--text">{{ __('Profile') }}</span>
+                        <span class="nav-link-inner--text">{{ __('Logout') }}</span>
+                        <form action="{{route('do.logout')}}" method="post" id="logout-form">@csrf</form>
                     </a>
                 </li>
             </ul>

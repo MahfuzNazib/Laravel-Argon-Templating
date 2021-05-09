@@ -1,33 +1,29 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Login Route Start
 Route::get('/', [LoginController::class, 'login_show'])->name('login.show');
-Route::get('/do_login', [LoginController::class, 'do_login'])->name('do.login');
-
+Route::post('/do_login', [LoginController::class, 'do_login'])->name('do.login');
 // Login Route End
 
-Route::get('/', function () {
-    return view('welcome');
+//logout route start
+Route::post('/do-logout', [LogoutController::class, 'do_logout'])->name('do.logout');
+//logout route end
+
+
+Route::group(['prefix' => 'admindashboard', 'middleware' => 'auth'], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
 });
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
