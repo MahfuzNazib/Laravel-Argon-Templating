@@ -29,6 +29,17 @@
                         <form role="form" method="post" action="{{ route('do.login') }}">
                             <div class="text-muted text-center mt-2 mb-3"><large>{{ __('Sign in') }}</large></div>
                             @csrf
+                            {{-- Invalid Message Show --}}
+                            @if(session('message'))
+                            <div class="form-group mb-3">
+                                <div class="alert alert-danger">
+                                    <center>
+                                        {{ session('message') }}
+                                    </center>
+                                </div>
+                            </div>
+                            @endif
+                            {{-- End Invalid Message --}}
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -44,7 +55,6 @@
                                     </div>
                                     <input class="form-control" name="password" placeholder="{{ __('Password') }}" type="password"  required>
                                 </div>
-                               
                             </div>
                             <div class="custom-control custom-control-alternative custom-checkbox">
                                 <input class="custom-control-input" name="remember" value="1" id="customCheckLogin" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
@@ -76,3 +86,4 @@
         </div>
     </div>
 @endsection
+

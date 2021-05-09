@@ -58,22 +58,22 @@ class LoginController extends Controller
         ]);
         
         $superadmin = SuperAdmin::where('email', $request->email)->first();
-        $user = User::where('email', $request->email)->where('password', $request->password)->first();
+        $user = User::where('email', $request->email)->first();
         
         if($superadmin){
             if(auth('super_admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)){
-                // return view('backend.dashboard');
                 return redirect()->route('dashboard');
             }else{
-                return view('auth.login');
+                return redirect()->route('login.show')->with('message', 'Invalid Email or Password');
             }
         }elseif( $user ){
             if(auth('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)){
-                // return view('backend.dashboard');
                 return redirect()->route('dashboard');
             }else{
-                return view('auth.login');
+                return redirect()->route('login.show')->with('message', 'Invalid Email or Password');
             }
+        }else{
+            return redirect()->route('login.show')->with('message', 'No Recored Matches');
         }
     }
 }
