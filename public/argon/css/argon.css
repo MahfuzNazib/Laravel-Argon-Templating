@@ -21883,3 +21883,10 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
        object-position: center right;
   }
 /* Logo Round Image End */
+
+/* Collaps Button Style Start */
+.cross-button{
+    width: 12px;
+    font-weight: 600;
+}
+/* Collaps Button Style End */
