@@ -41,6 +41,14 @@
             @yield('content')
         </div>
 
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                
+              </div>
+            </div>
+          </div>
+
         @guest()
             {{-- @include('backend.layouts.footers.guest') --}}
         @endguest
@@ -52,5 +60,9 @@
         
         <!-- Argon JS -->
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
+        <script src="{{ asset('argon') }}/js/ajax_form_submit.js"></script>
+        <script src="{{ asset('argon') }}/js/custom_script.js"></script>
+
+
     </body>
 </html>

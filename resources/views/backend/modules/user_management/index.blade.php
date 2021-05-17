@@ -17,7 +17,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="#" class="btn btn-sm btn-neutral">Add New User</a>
+                        <a class="waves-effect waves-light btn btn-sm btn-neutral modal-trigger" data-toggle="modal" data-content="{{ route('user.add.modal') }}"  href="#modal1">Add New User</a>
                     </div>
                 </div>
             </div>
