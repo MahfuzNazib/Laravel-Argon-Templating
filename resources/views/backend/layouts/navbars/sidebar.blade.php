@@ -11,7 +11,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
-        <a class="navbar-brand pt-0" href="{{ route('home') }}">
+        <a class="navbar-brand pt-0" href="{{ route('dashboard') }}">
             <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
@@ -28,7 +28,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
                     </div>
-                    <a href="{{ route('backend.modules.profile.edit') }}" class="dropdown-item">
+                    <a href="#" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
                         <span>{{ __('My profile') }}</span>
                     </a>
@@ -50,7 +50,6 @@
                         <i class="ni ni-user-run"></i>
                         <span>{{ __('Logout') }}</span>
                     </a>
-
                 </div>
             </li>
         </ul>
@@ -60,7 +59,7 @@
             <div class="navbar-collapse-header d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('dashboard') }}">
                             <img src="{{ asset('argon') }}/img/brand/blue.png">
                         </a>
                     </div>
@@ -77,7 +76,7 @@
             <ul class="navbar-nav">
                 {{-- Dashboard Link Start --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
+                    <a class="nav-link" href="{{ route('dashboard') }}">
                         @if (Route::currentRouteName() == 'dashboard')
                             <i class="ni ni-tv-2 text-primary"></i> 
                             <span class="nav-link-text active-link-text"> {{ __('Dashboard') }} </span>
@@ -93,7 +92,7 @@
                     @foreach ( App\Models\Module::orderBy('position', 'asc')->get() as $module)
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#navbar-examples-{{ $module->position }}" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                            <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                            <i class="{{ $module->icon }} text-primary"></i>
                             <span class="nav-link-text">{{ $module->name }}</span>
                         </a>
     
@@ -101,7 +100,7 @@
                             <ul class="nav nav-sm flex-column">
                                 @foreach ($module->sub_module->sortBy('position', false) as $sub_module)
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('backend.modules.profile.edit') }}">
+                                        <a class="nav-link" href="{{ route($sub_module->route) }}">
                                             {{ $sub_module->name }}
                                         </a>
                                     </li>

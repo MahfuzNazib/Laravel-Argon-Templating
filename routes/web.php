@@ -17,8 +17,15 @@ Route::post('/do-logout', [LogoutController::class, 'do_logout'])->name('do.logo
 
 Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-});
 
+	//user management route start
+    require_once 'backend/user_management.php';
+    //user management route end
+
+	// Role Management Route Start
+	require_once 'backend/role_management.php';
+	// Role Management Route End
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Auth::routes();
@@ -35,4 +42,3 @@ Route::group(['middleware' => 'auth'], function () {
 	 Route::get('table-list', function () {return view('backend.modules.tables');})->name('table');
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
-

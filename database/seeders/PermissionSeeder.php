@@ -33,31 +33,31 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Roles',
                 'module_id' => 1,
             ],
-            [
-                'id' => 4,
-                'key' => 'app_management',
-                'display_name' => 'App Management',
-                'module_id' => 2,
-            ],
-            [
-                'id' => 5,
-                'key' => 'dm_calculation',
-                'display_name' => 'DM Calculation',
-                'module_id' => 2,
-            ],
+            // [
+            //     'id' => 4,
+            //     'key' => 'app_management',
+            //     'display_name' => 'App Management',
+            //     'module_id' => 2,
+            // ],
+            // [
+            //     'id' => 5,
+            //     'key' => 'dm_calculation',
+            //     'display_name' => 'DM Calculation',
+            //     'module_id' => 2,
+            // ],
             // Product Management Permission Start
-            [
-                'id' => 6,
-                'key' => 'product_management',
-                'display_name' => 'Product Management',
-                'module_id' => 3,
-            ],
-            [
-                'id' => 7,
-                'key' => 'add_product',
-                'display_name' => 'Add Product',
-                'module_id' => 3,
-            ],
+            // [
+            //     'id' => 6,
+            //     'key' => 'product_management',
+            //     'display_name' => 'Product Management',
+            //     'module_id' => 3,
+            // ],
+            // [
+            //     'id' => 7,
+            //     'key' => 'add_product',
+            //     'display_name' => 'Add Product',
+            //     'module_id' => 3,
+            // ],
             // Product Managment Permission End
         ]);
     }

@@ -1,7 +1,9 @@
 @extends('backend.layouts.app')
 
 @section('content')
-    @include('backend.layouts.headers.cards')
+    {{-- @include('backend.layouts.headers.cards') --}}
+    @include('backend.layouts.dashboard_components.admincards')
+
     
     <div class="container-fluid mt--7">
         <div class="row">

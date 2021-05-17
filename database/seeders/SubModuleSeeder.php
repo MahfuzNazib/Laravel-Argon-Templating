@@ -38,33 +38,33 @@ class SubModuleSeeder extends Seeder
 
 
             //module id 2 start
-            [
-                'id' => 3,
-                'name' => 'DM Calculation',
-                'key' => 'dm_calculation',
-                'position' => 1,
-                'route' => 'role.all',
-                'module_id' => 2,
-            ],
+            // [
+            //     'id' => 3,
+            //     'name' => 'DM Calculation',
+            //     'key' => 'dm_calculation',
+            //     'position' => 1,
+            //     'route' => 'role.all',
+            //     'module_id' => 2,
+            // ],
             //module id 2 end
 
             // Product Module Start
-            [
-                'id' => 4,
-                'name' => 'Product List',
-                'key' => 'product_list',
-                'position' => 1,
-                'route' => 'product.index',
-                'module_id' => 3
-            ],
-            [
-                'id' => 5,
-                'name' => 'Add Product',
-                'key' => 'add_product',
-                'position' => 2,
-                'route' => 'product.add',
-                'module_id' => 3
-            ],
+            // [
+            //     'id' => 4,
+            //     'name' => 'Product List',
+            //     'key' => 'product_list',
+            //     'position' => 1,
+            //     'route' => 'product.index',
+            //     'module_id' => 3
+            // ],
+            // [
+            //     'id' => 5,
+            //     'name' => 'Add Product',
+            //     'key' => 'add_product',
+            //     'position' => 2,
+            //     'route' => 'product.add',
+            //     'module_id' => 3
+            // ],
             // Product Module End
 
         ]);

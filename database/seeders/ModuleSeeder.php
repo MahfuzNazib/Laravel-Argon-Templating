@@ -23,22 +23,22 @@ class ModuleSeeder extends Seeder
                 'position' => 1,
                 'route' => null,
             ],
-            [
-                'id' => 2,
-                'name' => 'Apps Management',
-                'key' => 'app_management',
-                'icon' => 'perm_phone_msg',
-                'position' => 2,
-                'route' => null,
-            ],
-            [
-                'id' => 3,
-                'name' => 'Product Management',
-                'key' => 'product_management',
-                'icon' => 'perm_phone_msg',
-                'position' => 3,
-                'route' => null,
-            ],
+            // [
+            //     'id' => 2,
+            //     'name' => 'Apps Management',
+            //     'key' => 'app_management',
+            //     'icon' => 'perm_phone_msg',
+            //     'position' => 2,
+            //     'route' => null,
+            // ],
+            // [
+            //     'id' => 3,
+            //     'name' => 'Product Management',
+            //     'key' => 'product_management',
+            //     'icon' => 'perm_phone_msg',
+            //     'position' => 3,
+            //     'route' => null,
+            // ],
         ]);
     }
 }
