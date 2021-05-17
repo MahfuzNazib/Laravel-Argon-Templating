@@ -16965,6 +16965,9 @@ a.btn-icon-only
 
     -moz-appearance: none;
 }
+
+
+
 .btn-icon-clipboard:hover
 {
     background-color: #fff;
@@ -21890,3 +21893,34 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     font-weight: 600;
 }
 /* Collaps Button Style End */
+
+/* Role Permission Block Design Start */
+.permission-block{
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+
+    display: inline-block;
+
+    width: 100%;
+    margin: 0;
+    margin: .5rem 0; 
+    padding: 1.5rem;
+
+    cursor: pointer;
+    text-align: left;
+    vertical-align: middle;
+    text-decoration: none;
+
+    color: #32325d;
+    border: 0;
+    border-radius: .375rem;
+    background-color: #f6f9fc;
+
+    -moz-appearance: none;
+
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, .1) 0 0 0 1px, rgba(0, 0, 0, .1) 0 4px 16px;
+}
+/* Role Permission Block Design End */
