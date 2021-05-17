@@ -1,3 +1,9 @@
+<style>
+    .active-link-text{
+        color: #f4645f;
+        font-weight: 600
+    }
+</style>
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
@@ -69,58 +75,44 @@
 
             <!-- Navigation Start-->
             <ul class="navbar-nav">
+                {{-- Dashboard Link Start --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                        @if (Route::currentRouteName() == 'dashboard')
+                            <i class="ni ni-tv-2 text-primary"></i> 
+                            <span class="nav-link-text active-link-text"> {{ __('Dashboard') }} </span>
+                        @else
+                            <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                        @endif
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Laravel Examples') }}</span>
-                    </a>
+                {{-- Dashboard Link End --}}
 
-                    <div id="navbar-examples">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('backend.modules.profile.edit') }}">
-                                    {{ __('User profile') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
-                                    {{ __('User Management') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('icons') }}">
-                        <i class="ni ni-planet text-blue"></i> {{ __('Nazib Mahfuz') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('icons') }}">
-                        <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('map') }}">
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Maps') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('table') }}">
-                      <i class="ni ni-bullet-list-67 text-default"></i>
-                      <span class="nav-link-text">Tables</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Register') }}
-                    </a>
-                </li>
+                {{-- Check User for Permission the routes Start --}}
+                @if (auth('super_admin')->check())
+                    @foreach ( App\Models\Module::orderBy('position', 'asc')->get() as $module)
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#navbar-examples-{{ $module->position }}" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                            <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                            <span class="nav-link-text">{{ $module->name }}</span>
+                        </a>
+    
+                        <div class="collapse" id="navbar-examples-{{ $module->position }}">
+                            <ul class="nav nav-sm flex-column">
+                                @foreach ($module->sub_module->sortBy('position', false) as $sub_module)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('backend.modules.profile.edit') }}">
+                                            {{ $sub_module->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </li>
+                    @endforeach
+                @endif
+                {{-- Check User for Permission the routes End --}}
+                
             </ul>
         </div>
     </div>

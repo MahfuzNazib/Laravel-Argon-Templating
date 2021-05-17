@@ -15,10 +15,8 @@ Route::post('/do_login', [LoginController::class, 'do_login'])->name('do.login')
 Route::post('/do-logout', [LogoutController::class, 'do_logout'])->name('do.logout');
 //logout route end
 
-
-Route::group(['prefix' => 'admindashboard', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
 });
 
 
