@@ -13,3 +13,5 @@
 
 <!-- Sweet Alert -->
 <link rel="stylesheet" href="{{ asset('argon') }}/css/sweetalert2.min.css">
+
+@yield('per_page_css')
