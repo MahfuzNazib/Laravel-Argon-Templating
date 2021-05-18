@@ -29,6 +29,7 @@ $(document).ready(function () {
                 
 
                 if (response.success) {
+                    console.log('Success');
                     swal("", `${response.success}`, "success");
                     $("#datatable").DataTable().ajax.reload();
                 }

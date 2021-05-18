@@ -1,6 +1,6 @@
 <form class="ajax-form" method="post" action="{{ route('role.add') }}">
     <div class="modal-header">
-        <h4>Add New Roles</h4>
+        <h4>Add New Role</h4>
     </div>
     <div class="modal-body">
         <div class="card bg-secondary border-0 mb-0">
