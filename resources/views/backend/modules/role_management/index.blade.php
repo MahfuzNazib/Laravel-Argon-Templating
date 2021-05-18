@@ -34,7 +34,17 @@
                 </div>
                 <div class="card-body">
                     <div class="row icon-examples">
-                        <h1>This is Role Index</h1>
+                        <div class="table-responsive col-md-12">
+                            <table class="table table-bordered role-datatable" id="datatable">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Role Name</th>
+                                    <th>Permissions</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,3 +57,47 @@
 <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
 @endpush
+
+@section("per_page_js")
+<script src="{{ asset('argon/js/datatable/jquery.validate.js') }}"></script>
+<script src="{{ asset('argon/js/datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('argon/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
+
+<script>
+    $(function () {
+        $('.role-datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('role.data') }}",
+            order: [
+                [0, 'Desc']
+            ],
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data:'permission',
+                    name:'permission'
+                },
+                {
+                    data: 'is_active',
+                    name: 'is_active'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                },
+            ]
+        });
+    });
+
+    
+
+</script>
+@endsection

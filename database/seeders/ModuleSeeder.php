@@ -19,7 +19,7 @@ class ModuleSeeder extends Seeder
                 'id' => 1,
                 'name' => 'User Management',
                 'key' => 'user_management',
-                'icon' => 'verified_user',
+                'icon' => 'ni ni-circle-08',
                 'position' => 1,
                 'route' => null,
             ],

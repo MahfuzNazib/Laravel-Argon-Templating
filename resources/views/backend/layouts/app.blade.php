@@ -10,22 +10,8 @@
 
     <title>{{ config('app.name', 'Argon Dashboard') }}</title>
 
-    <!-- Favicon -->
-    <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
-    <!-- Icons -->
-    <link href="{{ asset('argon') }}/vendor/nucleo/css/nucleo.css" rel="stylesheet">
-    <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-
-    <!-- Argon CSS -->
-    <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
-
-    <!-- Sweet Alert -->
-    <link rel="stylesheet" href="{{ asset('argon') }}/css/sweetalert2.min.css">
-
+    {{-- CSS Files --}}
+    @include('backend.layouts.includes.css')
 
     <style>
         .main-content {
@@ -64,17 +50,8 @@
     {{-- @include('backend.layouts.footers.guest') --}}
     @endguest
 
-    <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-    @stack('js')
-
-    <!-- Argon JS -->
-    <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
-    <script src="{{ asset('argon') }}/js/ajax_form_submit.js"></script>
-    <script src="{{ asset('argon') }}/js/custom_script.js"></script>
-    <!-- Sweet Alert JS -->
-    <script src="{{ asset('argon') }}/js/sweetalert2.min.js"></script>
+    {{-- Include JS Files --}}
+    @include('backend.layouts.includes.js')
 
 </body>
 
