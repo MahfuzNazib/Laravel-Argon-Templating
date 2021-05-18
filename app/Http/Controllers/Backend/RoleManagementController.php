@@ -15,7 +15,7 @@ class RoleManagementController extends Controller
         return view('backend.modules.role_management.index');
     }
 
-    // Geeting All Role Data
+    // Geeting All Role Data Start
     public function data(){
         if( can('roles') ){
             $role = Role::orderBy('id', 'desc')->get();
@@ -46,14 +46,16 @@ class RoleManagementController extends Controller
         }else{
             return view("errors.404");
         }
-        
     }
+    // Getting All Role Data End
 
-    // Add New Role Modal
+    // Add New Role Modal Start
     public function add_modal(){
         return view('backend.modules.role_management.modals.create');
     }
+    // Add New Role Modal End
 
+    // Insert Role Info Start
     public function add(Request $request){
         if( can('roles') ){
             $validator = Validator::make($request->all(), [
@@ -82,6 +84,6 @@ class RoleManagementController extends Controller
         }else{
             return view("errors.404");
         }
-        
     }
+    // Insert Role Info End
 }

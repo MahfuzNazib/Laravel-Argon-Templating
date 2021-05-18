@@ -5,8 +5,6 @@ $(document).ready(function () {
         }
     });
 
-
-
     $(document).on('submit','.ajax-form', function(e){
         e.preventDefault()
         $(".progress").show()
@@ -53,9 +51,8 @@ $(document).ready(function () {
                 let data = JSON.parse(response.responseText);
                 $.each(data.errors, (key, value) => {
                     $("[name^=" + key + "]").parent().addClass('has-error')
-                    $("[name^=" + key + "]").parent().append('<small class="danger text-muted form-errors">' + value[0] + '</small>');
+                    $("[name^=" + key + "]").parent().append('<small class="danger text-danger form-errors">' + value[0] + '</small>');
                 })
-
             }
         })
     })
