@@ -1,5 +1,5 @@
 $(window).on('load', function () {
-    console.clear()
+    // console.clear()
 })
 
 
