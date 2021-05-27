@@ -25,6 +25,10 @@ Route::group(['prefix' => 'Dashboard', 'middleware' => 'auth'], function () {
 	// Role Management Route Start
 	require_once 'backend/role_management.php';
 	// Role Management Route End
+
+	// Meal Management Route Start
+	require_once 'backend/meal_management.php';
+	// Meal Management Route End
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

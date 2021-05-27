@@ -33,6 +33,30 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Roles',
                 'module_id' => 1,
             ],
+
+            // Meal Permission Start
+            [
+                'id' => 4,
+                'key' => 'meal_management',
+                'display_name' => 'Meal Management',
+                'module_id' => 2,
+            ],
+            [
+                'id' => 5,
+                'key' => 'daily_meals',
+                'display_name' => 'Daily Meals',
+                'module_id' => 2,
+            ],
+            [
+                'id' => 6,
+                'key' => 'meal_list',
+                'display_name' => 'Meal List',
+                'module_id' => 2,
+            ],
+
+            // Meal Permission End
+
+            
             // [
             //     'id' => 4,
             //     'key' => 'app_management',

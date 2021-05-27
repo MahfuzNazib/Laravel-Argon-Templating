@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             ModuleSeeder::class,
             SubModuleSeeder::class,
-            SuperAdminSeeder::class,
+            // SuperAdminSeeder::class,
         ]);
     }
 }

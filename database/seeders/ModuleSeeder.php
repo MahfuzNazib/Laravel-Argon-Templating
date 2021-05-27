@@ -19,10 +19,20 @@ class ModuleSeeder extends Seeder
                 'id' => 1,
                 'name' => 'User Management',
                 'key' => 'user_management',
-                'icon' => 'verified_user',
+                'icon' => 'ni ni-circle-08',
                 'position' => 1,
                 'route' => null,
             ],
+
+            [
+                'id' => 2,
+                'name' => 'Meal Management',
+                'key' => 'meal_management',
+                'icon' => 'ni ni-world',
+                'position' => 2,
+                'route' => null,
+            ],
+
             // [
             //     'id' => 2,
             //     'name' => 'Apps Management',
