@@ -102,8 +102,6 @@
         });
     });
 </script>
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> f442133d87b5e25ee49a105899f0449b89be71cf
+
+
