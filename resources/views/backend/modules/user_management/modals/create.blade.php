@@ -1,85 +1,86 @@
-<div class="modal-header">
-    <h4>Add New User</h4>
-</div>
-<div class="modal-body">
-    <div class="card bg-secondary border-0 mb-0">
-        <div class="card-body">
-            <form class="ajax-form" method="post" action="{{ route('user.add') }}">
-                {{-- Name --}}
+<form class="ajax-form" method="post" action="{{ route('user.add') }}">
+    <div class="modal-header">
+        <h4>Add New User</h4>
+    </div>
+    <div class="modal-body">
+        <div class="card bg-secondary border-0 mb-0">
+            <div class="card-body">
+                <!-- Name Start -->
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                         </div>
-                        <input class="form-control" placeholder="User Full Name" type="text">
+                        <input class="form-control" placeholder="User Full Name" type="text" name="name">
                     </div>
                 </div>
-                {{-- Email --}}
+                <!-- Name End -->
+
+                <!-- Email Start -->
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                         </div>
-                        <input class="form-control" placeholder="Email" type="email">
+                        <input class="form-control" placeholder="Email" type="email" name="email">
                     </div>
                 </div>
-                {{-- Phone No --}}
+                <!-- Email End -->
+
+                <!-- Phone No Start -->
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-tablet-button"></i></i></span>
                         </div>
-                        <input class="form-control" placeholder="Phone No" type="text">
+                        <input class="form-control" placeholder="Phone No" type="text" name="phone">
                     </div>
                 </div>
-                {{-- Role --}}
+                <!-- Phone No End -->
+
+                <!-- Role Start -->
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-ruler-pencil"></i></span>
                         </div>
-                        <select class="form-control">
+                        <select class="form-control" name="role_id">
                             <option selected disabled>Select User Role</option>
-                            <option>Admin</option>
-                            <option>Manager</option>
-                            <option>User</option>
+                            @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
+                <!-- Role End -->
+
+                <!-- Profile Picture Start -->
+                <div class="form-group">
+                    <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Select Profile Picture" type="file" name="image">
+                    </div>
+                </div>
+                <!-- Profile Picture End -->
+
+                <!-- Password Start -->
                 <div class="form-group">
                     <div class="input-group input-group-merge input-group-alternative">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                         </div>
-                        <input class="form-control" placeholder="Password" type="password">
+                        <input class="form-control" placeholder="Set Password" type="password" name="password">
                     </div>
                 </div>
-            </form>
+                <!-- Password End -->
+            </div>
         </div>
     </div>
-</div>
-{{-- <div class="row">
-        <div class="col-md-12">
-            <div id="prefixes" class="card bg-secondary border-0 mb-0">
-                <div class="card-content">
-                    <form class="ajax-form" method="post" action="{{ route('user.add') }}">
-@csrf
-<div class="form-group mb-3">
-    <div class="input-group input-group-alternative">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-        </div>
-        <input class="form-control" placeholder="{{ __('Email') }}" type="email" name="email" value="{{ old('email') }}"
-            required autofocus>
-    </div>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div> --}}
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary">Save</button>
-</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>

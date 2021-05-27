@@ -14,7 +14,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'role_id',
+        'image',
         'password',
+        'is_active'
     ];
 
     
@@ -26,4 +30,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Create New User Start
+    public static function createNewUser($requestData){
+        try{
+            $id = static::create($requestData);
+            return $id;
+        }catch(\Exception $e){   
+            throw new \Exception($e->getMessage(), 1);               
+        }
+    }
+    // Create New User End
 }
