@@ -87,7 +87,8 @@
                 </li>
                 {{-- Dashboard Link End --}}
 
-                {{-- Check User for Permission the routes Start --}}
+                <!-- Check User for Permission the routes Start -->
+                <!-- For Admin Start -->
                 @if (auth('super_admin')->check())
                     @foreach ( App\Models\Module::orderBy('position', 'asc')->get() as $module)
                     <li class="nav-item">
@@ -109,8 +110,38 @@
                         </div>
                     </li>
                     @endforeach
+                <!-- For Admin End -->
+
+                <!-- For Users Start -->
+                @elseif(auth('web')->check())
+                    @foreach ( App\Models\Module::orderBy('position', 'asc')->get() as $module)
+                    @if(can($module->key))
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#navbar-examples-{{ $module->position }}" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                            <i class="{{ $module->icon }} text-primary"></i>
+                            <span class="nav-link-text">{{ $module->name }}</span>
+                        </a>
+    
+                        <div class="collapse" id="navbar-examples-{{ $module->position }}">
+                            <ul class="nav nav-sm flex-column">
+                                @foreach ($module->sub_module->sortBy('position', false) as $sub_module)
+                                    @if(can($sub_module->key))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route($sub_module->route) }}">
+                                            {{ $sub_module->name }}
+                                        </a>
+                                    </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+                    </li>
+                    @endif
+                    @endforeach
                 @endif
-                {{-- Check User for Permission the routes End --}}
+                <!-- For Users End -->
+
+                <!-- Check User for Permission the routes End -->
                 
             </ul>
         </div>

@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -18,23 +18,44 @@ class UserController extends Controller
     }
 
     // Get All User Data Start
-    // public function allUserData(){
-    //     if(can('all_user')){
-    //         if(auth('super_admin')->check()){
-    //             $users = User::orderBy('id', 'desc')->get();
-    //         }elseif(auth('web')->check()){
-    //             $users = User::orderBy('id', 'desc')->where('id', '!=', auth('web')->user()->id)->get();
-    //         }
-    //         return DataTables::of($users)
-    //         ->rowColumns(['action', 'is_active', 'role', 'info'])
-    //         ->editColumn('info', function(User $users){
-
-    //         });
+    public function allUserData(){
+        if(can('all_user')){
+            if(auth('super_admin')->check()){
+                $users = User::orderBy('id', 'desc')->get();
+            }elseif(auth('web')->check()){
+                $users = User::orderBy('id', 'desc')->where('id', '!=', auth('web')->user()->id)->get();
+            }
+            return DataTables::of($users)
+            ->rawColumns(['info','role', 'is_active', 'action'])
+            ->editColumn('role', function(User $users){
+                return $users->role->name;
+            })
+            ->editColumn('info', function(User $users){
+                return "<p>Name  : $users->name</p>
+                        <p>Phone : $users->phone</p>
+                        <p>Email : $users->email</p>";
+            })
+            ->editColumn('is_active', function(User $users){
+                if($users->is_active == true){
+                    return '<span class="badge badge-success">Active</span>';
+                }else{
+                    return '<span class="badge badge-danger">Inactive</span>';
+                }
+            })
+            ->addColumn('action', function(User $users){
+                return '<a href="#">
+                            <button class="btn btn-info btn-sm">Edit</button>
+                        </a>
+                        <a href="#">
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </a>';
+            })
+            ->make(true);
             
-    //     }else{
-
-    //     }
-    // }
+        }else{
+            return view('errors.404');
+        }
+    }
     // Get All User Data End    
 
     // Add New User

@@ -9,7 +9,7 @@ Route::group(['prefix' => 'usermanagement'], function(){
     //user start 
     Route::group(['prefix' => 'user'], function(){
         Route::get("/",[UserController::class,'index'])->name('user.all');
-        Route::get("/data",[UserController::class,'data'])->name('user.data');
+        Route::get("/data",[UserController::class,'allUserData'])->name('user.data');
 
         Route::get("/add",[UserController::class,'add_modal'])->name('user.add.modal');
         Route::post("/add",[UserController::class,'add'])->name('user.add');

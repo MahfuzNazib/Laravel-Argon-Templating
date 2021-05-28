@@ -12,7 +12,11 @@ use Yajra\DataTables\Facades\DataTables;
 class RoleManagementController extends Controller
 {
     public function index(){
-        return view('backend.modules.role_management.index');
+        if(can('roles')){
+            return view('backend.modules.role_management.index');
+        }else{
+            return view('errors.404');
+        }
     }
 
     // Geeting All Role Data Start
