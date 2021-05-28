@@ -26,14 +26,19 @@ class UserController extends Controller
                 $users = User::orderBy('id', 'desc')->where('id', '!=', auth('web')->user()->id)->get();
             }
             return DataTables::of($users)
-            ->rawColumns(['info','role', 'is_active', 'action'])
+            ->rawColumns(['profile_picture','role', 'is_active', 'action'])
             ->editColumn('role', function(User $users){
                 return $users->role->name;
             })
-            ->editColumn('info', function(User $users){
-                return "<p>Name  : $users->name</p>
-                        <p>Phone : $users->phone</p>
-                        <p>Email : $users->email</p>";
+            ->editColumn('profile_picture', function(User $users){
+                if($users->image == null){
+                    $profile = asset("argon/img/profile_picture/d_pp.png");
+                }else{
+                    $profile = asset('argon/img/profile_picture/'.$users->image);
+                }
+                return "<center>
+                            <img src='$profile' width='100px' class='rounded'>
+                        </center>";
             })
             ->editColumn('is_active', function(User $users){
                 if($users->is_active == true){
@@ -43,11 +48,12 @@ class UserController extends Controller
                 }
             })
             ->addColumn('action', function(User $users){
-                return '<a href="#">
-                            <button class="btn btn-info btn-sm">Edit</button>
+                return '<a class="waves-effect waves-light btn btn-sm btn-info modal-trigger"
+                           data-toggle="modal" data-content="{{ route("user.add.modal") }}"  href="#modal1">
+                            View
                         </a>
                         <a href="#">
-                            <button class="btn btn-danger btn-sm">Delete</button>
+                            <button class="btn btn-success btn-sm">Edit</button>
                         </a>';
             })
             ->make(true);
@@ -81,6 +87,20 @@ class UserController extends Controller
                 try{
                     $data = $request->all();
                     $data['password'] = Hash::make($request->password); //Make Password Hash
+
+                    // Image Processing Start
+                    if($request->hasFile('image')){
+                        $file = $request->file('image');
+                        $extension = $file->getClientOriginalExtension();
+                        $filename = time(). '.' .$extension;
+                        
+                        $file->move('argon/img/profile_picture/',$filename);
+                        $data['image'] = $filename;
+            
+                    }else{
+                        $data['image'] = null;
+                    }
+                    // Image Processing End
 
                     $storeUser = User::createNewUser($data);
                     

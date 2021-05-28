@@ -41,7 +41,8 @@
                             <table class="table table-bordered user-datatable" id="datatable">
                                 <thead>
                                     <th>ID</th>
-                                    <th>User Info</th>
+                                    <th>ProfilePicture</th>
+                                    <th>Name</th>
                                     <th>Role</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -87,8 +88,12 @@
                     name: 'id'
                 },
                 {
-                    data: 'info',
-                    name: 'info'
+                    data: 'profile_picture',
+                    name: 'profile_picture'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
                 },
                 {
                     data:'role',
