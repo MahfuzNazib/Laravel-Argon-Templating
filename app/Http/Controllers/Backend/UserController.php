@@ -52,7 +52,8 @@ class UserController extends Controller
                            data-toggle="modal" data-content="{{ route("user.add.modal") }}"  href="#modal1">
                             View
                         </a>
-                        <a href="#">
+
+                        <a data-toggle="modal" data-content="'. route('user.edit',$users->id) .'"  href="#modal1" >
                             <button class="btn btn-success btn-sm">Edit</button>
                         </a>';
             })
@@ -66,7 +67,7 @@ class UserController extends Controller
 
     // Add New User
     public function add_modal(){
-        $roles = Role::all();
+        $roles = Role::where('is_active', 1)->get();
         return view('backend.modules.user_management.modals.create', compact('roles'));
     }
 
@@ -119,4 +120,17 @@ class UserController extends Controller
         }
     }
     // Store New User Data End
+
+    // Edit User Start
+    public function edit($id){
+        // if(can('all_user')){
+        //     $user = User::find($id);
+        //     return view('backend.modules.user_management.modals.edit', compact('user'));
+        // }else{
+        //     return view('errors.404');
+        // }
+        return $id;
+        exit();
+    }
+    // Edit User End
 }
