@@ -101,4 +101,37 @@ class RoleManagementController extends Controller
         }
     }
     // Edit Role End
+
+    // Update Role Start
+    public function update(Request $request, $id){
+        if(can('roles')){
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:roles,name,'. $id,
+                'permission.*' => 'required',
+            ]);
+    
+            if( $validator->fails() ){
+                return response()->json(['errors' => $validator->errors()], 422);
+            }else{
+                try{
+                    $role = Role::find($id);
+                    $role->name = $request->name;
+                    $role->is_active = $request->is_active;
+                    if( $role->save() ){
+                        $role->permission()->detach();
+                        foreach( $request['permission'] as $permission ){
+                            $role->permission()->attach($permission);
+                        }
+                        return response()->json(['success' => 'Role Updated Successfully'], 200);
+                    }
+                }
+                catch(Exception $e){
+                    return response()->json(['error' => $e->getMessage()], 200);
+                }
+            }
+        }else{
+            return view("errors.404");
+        }
+    }
+    // Update Role End
 }

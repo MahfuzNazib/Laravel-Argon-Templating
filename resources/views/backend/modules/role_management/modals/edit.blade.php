@@ -1,4 +1,4 @@
-<form class="ajax-form" method="post" action="{{ route('role.add') }}">
+<form class="ajax-form" method="post" action="{{ route('role.update', $role->id) }}">
     <div class="modal-header">
         <h4>Edit {{ $role->name }} Role</h4>
     </div>
@@ -25,10 +25,10 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-check-bold"></i></span>
                                 </div>
-                                <select class="form-control">
+                                <select class="form-control" name="is_active">
                                     @if ($role->is_active == 1)
-                                        <option value="{{ $role->is_active }}" selected>Active</option>
-                                        <option value="0">Inactive</option>
+                                    <option value="{{ $role->is_active }}" selected>Active</option>
+                                    <option value="0">Inactive</option>
                                     @else
                                     <option value="{{ $role->is_active }}">Inactive</option>
                                     <option value="1">Active</option>
@@ -50,19 +50,16 @@
                             <div class="row">
                                 <label>
                                     <input type="checkbox" class="module_check" name="permission[]"
-                                        value="{{ $module_permission->id }}" 
-                                        @php
-                                            $i = 0;
-                                        @endphp
-                                        @foreach( $role->permission as $role_permission )
-                                            @if( $role_permission->id == $module_permission->id )
-                                                {{ $i++ }}
-                                            @endif
-                                        @endforeach
-                                        @if( $i != 0 )
-                                            checked
-                                        @endif
-                                        />
+                                        value="{{ $module_permission->id }}" @php $i=0; @endphp @foreach(
+                                        $role->permission as $role_permission )
+                                    @if( $role_permission->id == $module_permission->id )
+                                    {{ $i++ }}
+                                    @endif
+                                    @endforeach
+                                    @if( $i != 0 )
+                                    checked
+                                    @endif
+                                    />
                                     <span>{{ $module->name }}</span>
                                 </label>
                             </div>
@@ -72,22 +69,19 @@
                             <div class="sub_module_block">
                                 <label>
                                     <input type="checkbox" class="sub_module_check" name="permission[]" disabled
-                                        value="{{ $sub_module_permission->id }}" 
-                                        @php
-                                            $j = 0;
-                                        @endphp
-                                        @foreach( $role->permission as $role_permission )
-                                            @if( $role_permission->id == $sub_module_permission->id )
-                                                    {{ $j++ }}
-                                            @endif
-                                        @endforeach
-                                        @if( $i == 0 )
-                                            disabled
-                                        @endif
-                                        @if( $j > 0 )
-                                        checked
-                                        @endif
-                                        />
+                                        value="{{ $sub_module_permission->id }}" @php $j=0; @endphp @foreach(
+                                        $role->permission as $role_permission )
+                                    @if( $role_permission->id == $sub_module_permission->id )
+                                    {{ $j++ }}
+                                    @endif
+                                    @endforeach
+                                    @if( $i == 0 )
+                                    disabled
+                                    @endif
+                                    @if( $j > 0 )
+                                    checked
+                                    @endif
+                                    />
                                     <span>{{ $sub_module_permission->display_name }}</span>
                                 </label>
                             </div>
@@ -112,9 +106,17 @@
 
 
 <script>
+    $(document).ready(function () {
+        var module_value = $('.module_check').val();
+        if(module_value){
+            $('.permission-block').find(".sub_module_block").find(".sub_module_check").removeAttr("disabled");
+        }else{
+            $('.permission-block').find(".sub_module_block").find(".sub_module_check").attr("disabled", "disabled");
+        }
+    });
+
     $(".module_check").click(function (e) {
         let $this = $(this);
-        console.log(e.target.checked)
         if (e.target.checked == true) {
             $this.closest(".permission-block").find(".sub_module_block").find(".sub_module_check").removeAttr(
                 "disabled")
