@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,4 +46,16 @@ class User extends Authenticatable
         }
     }
     // Create New User End
+
+    // Update User Informations Start
+    public static function UpdateUser($requestDate, $id){
+        try{
+            $user = static::find($id);
+            $user->fill($requestDate)->update();
+            return $user;
+        }catch(\Exception $e){
+            throw new \Exception($e->getMessage(), 1); 
+        }
+    }
+    // Update User Informations End 
 }

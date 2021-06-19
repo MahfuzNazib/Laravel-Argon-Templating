@@ -40,6 +40,7 @@ class UserController extends Controller
                             <img src='$profile' width='100px' class='rounded'>
                         </center>";
             })
+            
             ->editColumn('is_active', function(User $users){
                 if($users->is_active == true){
                     return '<span class="badge badge-success">Active</span>';
@@ -47,6 +48,7 @@ class UserController extends Controller
                     return '<span class="badge badge-danger">Inactive</span>';
                 }
             })
+
             ->addColumn('action', function(User $users){
                 return '<a class="waves-effect waves-light btn btn-sm btn-info modal-trigger"
                            data-toggle="modal" data-content="{{ route("user.add.modal") }}"  href="#modal1">
@@ -55,7 +57,8 @@ class UserController extends Controller
 
                         <a data-toggle="modal" data-content="'. route('user.edit',$users->id) .'"  href="#modal1" >
                             <button class="btn btn-success btn-sm">Edit</button>
-                        </a>';
+                        </a>
+                        ';
             })
             ->make(true);
             
@@ -123,14 +126,43 @@ class UserController extends Controller
 
     // Edit User Start
     public function edit($id){
-        // if(can('all_user')){
-        //     $user = User::find($id);
-        //     return view('backend.modules.user_management.modals.edit', compact('user'));
-        // }else{
-        //     return view('errors.404');
-        // }
-        return $id;
-        exit();
+        if(can('all_user')){
+            $user = User::find($id);
+            $roles = Role::select('id','name')->where('is_active', 1)->get();
+            return view('backend.modules.user_management.modals.edit', compact('user', 'roles'));
+        }else{
+            return view('errors.404');
+        }
     }
     // Edit User End
+
+    // Update User Start
+    public function update(Request $request, $id){
+        if(can('all_user')){
+            $validator = Validator::make($request->all(), [
+                'role_id' => 'required',
+                'name'    => 'required',
+                'phone'   => 'required|min:11|max:11',
+                'is_active' => 'required',
+                'email'   => 'required'
+            ]);
+
+            if($validator->fails()){
+                return response()->json(['errors' => $validator->errors()] ,422);
+            }else{
+                try{
+                    $data = $request->all();
+                    $updateUser = User::UpdateUser($data, $id);
+                    if($updateUser){
+                        return response()->json(['success' => 'User Successfully Updated'],200);
+                    }
+                }catch(Exception $e){
+                    return response()->json(['error' => $e->getMessage()],200);
+                }
+            }
+        }else{
+            return view('errors.404');
+        }
+    }
+    // Update User End
 }
