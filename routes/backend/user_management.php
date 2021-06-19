@@ -14,6 +14,8 @@ Route::group(['prefix' => 'usermanagement'], function(){
         Route::get("/add",[UserController::class,'add_modal'])->name('user.add.modal');
         Route::post("/add",[UserController::class,'add'])->name('user.add');
 
+        Route::get("/view_user/{id}", [UserController::class, 'view_user'])->name('user.view');
+
         Route::get("/edit/{id}",[UserController::class,'edit'])->name('user.edit');
         Route::post("/edit/{id}",[UserController::class,'update'])->name('user.update');
 

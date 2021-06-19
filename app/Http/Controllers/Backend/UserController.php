@@ -50,9 +50,8 @@ class UserController extends Controller
             })
 
             ->addColumn('action', function(User $users){
-                return '<a class="waves-effect waves-light btn btn-sm btn-info modal-trigger"
-                           data-toggle="modal" data-content="{{ route("user.add.modal") }}"  href="#modal1">
-                            View
+                return '<a href="'.route('user.view', $users->id).'">
+                            <button class="btn btn-primary btn-sm">View</button>
                         </a>
 
                         <a data-toggle="modal" data-content="'. route('user.edit',$users->id) .'"  href="#modal1" >
@@ -124,6 +123,17 @@ class UserController extends Controller
     }
     // Store New User Data End
 
+    // View User Start
+    public function view_user($id){
+        if(can('all_user')){
+            $user = User::with('role')->find($id);
+            return view('backend.modules.user_management.view_user', compact('user'));
+        }else{
+            return view('errors.404');
+        }
+    }   
+    // View User End
+
     // Edit User Start
     public function edit($id){
         if(can('all_user')){
@@ -152,6 +162,24 @@ class UserController extends Controller
             }else{
                 try{
                     $data = $request->all();
+                    // Image Processing Start
+                    if($request->hasFile('image')){
+                        $file = $request->file('image');
+                        $extension = $file->getClientOriginalExtension();
+                        $filename = time(). '.' .$extension;
+                        
+                        $file->move('argon/img/profile_picture/',$filename);
+                        $data['image'] = $filename;
+            
+                    }else{
+                        if($data['previous_profile']){
+                            $data['image'] = $data['previous_profile'];
+                        }else{
+                            $data['image'] = null;
+                        }
+                    }
+                    // Image Processing End
+
                     $updateUser = User::UpdateUser($data, $id);
                     if($updateUser){
                         return response()->json(['success' => 'User Successfully Updated'],200);

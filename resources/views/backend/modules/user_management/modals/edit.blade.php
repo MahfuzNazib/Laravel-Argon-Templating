@@ -66,7 +66,7 @@
                         </div>
                         <select class="form-control" name="is_active">
                             @if ($user->is_active == 1)
-                                <option value="{{ $user->is_active }} selected">Active</option>
+                                <option value="{{ $user->is_active }}" selected>Active</option>
                                 <option value="0">Inactive</option>
                             @else
                                 <option value="0" selected>Inactive</option>
@@ -84,6 +84,9 @@
                             <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                         </div>
                         <input class="form-control" placeholder="Select Profile Picture" type="file" name="image">
+                        @if ($user->image)
+                            <input type="hidden" name="previous_profile" value="{{ $user->image }}">
+                        @endif
                     </div>
                 </div>
                 <!-- Profile Picture End -->

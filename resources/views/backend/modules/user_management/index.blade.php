@@ -37,7 +37,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row icon-examples">
-                        <div class="table-responsive col-md-12">
+                        <div class="col-md-12">
                             <table class="table table-bordered user-datatable" id="datatable">
                                 <thead>
                                     <th>ID</th>
