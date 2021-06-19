@@ -90,4 +90,15 @@ class RoleManagementController extends Controller
         }
     }
     // Insert Role Info End
+
+    // Edit Role Start
+    public function edit($id){
+        if(can('roles')){
+            $role = Role::find($id);
+            return view('backend.modules.role_management.modals.edit', compact('role'));
+        }else{
+
+        }
+    }
+    // Edit Role End
 }
