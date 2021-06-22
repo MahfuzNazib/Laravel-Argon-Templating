@@ -100,11 +100,22 @@
                         <div class="collapse" id="navbar-examples-{{ $module->position }}">
                             <ul class="nav nav-sm flex-column">
                                 @foreach ($module->sub_module->sortBy('position', false) as $sub_module)
+                                    @if (Route::currentRouteName() == route($sub_module->route))
+                                    <li class="nav-item">
+                                        <a class="nav-link active-link-text" href="{{ route($sub_module->route) }}">
+                                            {{ $sub_module->name }}
+                                        </a>
+                                    </li>
+
+                                    @else
+
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route($sub_module->route) }}">
                                             {{ $sub_module->name }}
                                         </a>
                                     </li>
+
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>
